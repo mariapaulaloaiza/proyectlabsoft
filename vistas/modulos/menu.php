@@ -4,7 +4,13 @@
 
 		<ul class="sidebar-menu">
 
-			<li class="active">
+		<?php
+
+		if($_SESSION["perfil"] == "Administrador"){
+
+			echo 
+
+			'<li class="active">
 
 				<a href="inicio">
 
@@ -24,9 +30,174 @@
 
 				</a>
 
+			</li>';
+
+
+
+		}
+
+
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Entrenador"){
+
+			echo '
+
+			<li>
+
+				<a href="categorias">
+
+					<i class="fa fa-circle-o"></i>
+					<span>Categorías</span>
+
+				</a>
+
 			</li>
 
+			<li>
+
+				<a href="ligas">
+
+					<i class="fa fa-th"></i>
+					<span>ligas</span>
+
+				</a>
+
+			</li>';
+
+
+		}
+		
+		
+		if($_SESSION["perfil"] == "Administrador"){
+
+			echo
+
+			'<li>
+
+				<a href="entrenadores">
+
+					<i class="fa fa-users"></i>
+					<span>entrenadores</span>
+
+				</a>
+
+			</li>';
+
+
+
+		}
+
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Entrenador"){
+
+			echo 
+
+			'<li>
+
+				<a href="deportistas">
+
+					<i class="fa fa-users"></i>
+					<span>deportistas</span>
+
+				</a>
+
+			</li>';
+		
+		}
+
+
+		?>
 			
+			<!--<li>
+
+				<a href="catligas">
+
+					<i class="fa fa-circle-o"></i>
+					<span>categorias de ligas</span>
+
+				</a>
+
+			</li>-->
+
+
+			
+			
+
+
+
+
+			<li>
+
+				<a href="productos">
+
+					<i class="fa fa-product-hunt"></i>
+					<span>Productos</span>
+
+				</a>
+
+			</li> 
+
+			
+
+			<!--<li>
+
+				<a href="clientes">
+
+					<i class="fa fa-users"></i>
+					<span>Clientes</span>
+
+				</a>
+
+			</li>
+
+			<li class="treeview">
+
+				<a href="#">
+
+					<i class="fa fa-list-ul"></i>
+					
+					<span>Ventas</span>
+					
+					<span class="pull-right-container">
+					
+						<i class="fa fa-angle-left pull-right"></i>
+
+					</span>
+
+				</a>
+
+				<ul class="treeview-menu">
+					
+					<li>
+
+						<a href="ventas">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Administrar ventas</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="crear-venta">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Crear venta</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="reportes">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Reporte de ventas</span>
+
+						</a>
+
+					</li>-->
 
 				</ul>
 

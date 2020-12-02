@@ -99,6 +99,17 @@
 
 				</a>
 
+			</li>
+			
+			<li>
+
+				<a href="catligas">
+
+					<i class="fa fa-circle-o"></i>
+					<span>categorias de ligas</span>
+
+				</a>
+
 			</li>';
 		
 		}
@@ -134,6 +145,19 @@
 				</a>
 
 			</li> 
+
+			<li>
+
+				<a href="entrenadorligas">
+
+					<i class="fa fa-product-hunt"></i>
+					<span>Entrenadores a ligas</span>
+
+				</a>
+
+			</li> 
+
+
 
 			
 

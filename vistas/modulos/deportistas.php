@@ -45,7 +45,6 @@
            <th>Documento</th>
            <th>Edad</th>
            <th>Celular</th>
-           <th>Liga</th>
            <th>Estrato</th>
            <th>Rendimiento</th>
            <th>Faltas</th>
@@ -66,6 +65,7 @@
         $valor = null;
 
         $deportistas = ControladorDeportistas::ctrMostrarDeportistas($item, $valor);
+        
 
        foreach ($deportistas as $key => $value){
          
@@ -75,7 +75,6 @@
                   <td>'.$value["documento"].'</td>
                   <td>'.$value["edad"].'</td>
                   <td>'.$value["celular"].'</td>
-                  <td>'.$value["liga"].'</td>
                   <td>'.$value["estrato"].'</td>
                   <td>'.$value["rendimiento"].'</td>
                   <td>'.$value["faltas"].'</td>
@@ -229,7 +228,7 @@ MODAL AGREGAR DEPORTISTA
 
                   foreach ($ligas as $key => $value) {
                     
-                    echo '<option value="'.$value["nombreliga"].'">'.$value["nombreliga"].'</option>';
+                    echo '<option value="'.$value["id"].'">'.$value["nombreliga"].'</option>';
                   }
 
                   ?>
@@ -262,7 +261,7 @@ MODAL AGREGAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevoRendimiento" placeholder="Ingresar rendimiento" id="nuevoRendimiento" required>
+                <input type="number" class="form-control input-lg" name="nuevoRendimiento" placeholder="Ingresar rendimiento (número del 1 al 100)" id="nuevoRendimiento" required>
 
               </div>
 
@@ -420,6 +419,18 @@ MODAL EDITAR DEPORTISTA
 
             </div>
 
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg"   id="verliga"  readonly>
+
+              </div>
+
+            </div>
+
             <!-- ENTRADA PARA EL LIGA -->
             
           <div class="form-group">
@@ -429,6 +440,8 @@ MODAL EDITAR DEPORTISTA
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
                 <select class="form-control input-lg" id="editarLiga" name="editarLiga" required>
+
+
                   
                   <option value="" id="editarLiga"></option>
 
@@ -441,7 +454,7 @@ MODAL EDITAR DEPORTISTA
 
                   foreach ($ligas as $key => $value) {
                     
-                    echo '<option value="'.$value["nombreliga"].'">'.$value["nombreliga"].'</option>';
+                    echo '<option value="'.$value["id"].'">'.$value["nombreliga"].'</option>';
                   }
 
                   ?>

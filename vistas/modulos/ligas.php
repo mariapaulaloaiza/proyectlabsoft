@@ -45,9 +45,6 @@
            <th>Deporte</th>
            <th>Direccion</th>
            <th>Telefono</th>
-           <th>Categoria 1</th>
-           <th>Categoria 2</th>
-           <th>Categoria 3</th>
            <th>Acciones</th>
 
          </tr> 
@@ -72,10 +69,7 @@
 
 
                   echo '<td>'.$value["direccion"].'</td>
-                  <td>'.$value["telefono"].'</td>
-                  <td>'.$value["categoria1"].'</td>
-                  <td>'.$value["categoria2"].'</td>
-                  <td>'.$value["categoria3"].'</td>';
+                  <td>'.$value["telefono"].'</td>';
 
 
                   
@@ -200,102 +194,8 @@ MODAL AGREGAR LIGA
 
             </div>
 
-          <!-- ENTRADA PARA EL CATEGORIA1 -->
-
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="nuevaCategoria1" name="nuevaCategoria1" required>
-                  
-                  <option value="">Selecionar categoria</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-                  foreach ($categorias as $key => $value) {
-                    
-                    echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA EL CATEGORIA2 -->
-
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="nuevaCategoria2" name="nuevaCategoria2" required>
-                  
-                  <option value="">Selecionar categoria</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-                  foreach ($categorias as $key => $value) {
-                    
-                    echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-            </div>
 
 
-            <!-- ENTRADA PARA EL CATEGORIA3 -->
-
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="nuevaCategoria3" name="nuevaCategoria3" required>
-                  
-                  <option value="">Selecionar categoria</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-                  foreach ($categorias as $key => $value) {
-                    
-                    echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-            </div>
   
 
             
@@ -420,107 +320,9 @@ MODAL EDITAR LIGA
 
             </div>
 
-            <!-- ENTRADA PARA EL CATEGORIA1 -->
+    
 
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="editarCategoria1" name="editarCategoria1" required>
-                  
-                  <option value="">Selecionar categoria</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-                  foreach ($categorias as $key => $value) {
-                    
-                    echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA EL CATEGORIA2 -->
-
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="editarCategoria2" name="editarCategoria2" required>
-                  
-                  <option value="">Selecionar categoria</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-                  foreach ($categorias as $key => $value) {
-                    
-                    echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA EL CATEGORIA3 -->
-
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="editarCategoria3" name="editarCategoria3" required>
-                  
-                  <option value="">Selecionar categoria</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-
-                  foreach ($categorias as $key => $value) {
-                    
-                    echo '<option value="'.$value["categoria"].'">'.$value["categoria"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-            </div>
-
-          
-
-        
-
-            
+                   
 
           </div>
 

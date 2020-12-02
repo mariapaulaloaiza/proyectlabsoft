@@ -4,7 +4,7 @@
     
     <h1>
       
-      Administrar usuarios
+      Administrar becas
     
     </h1>
 
@@ -12,7 +12,7 @@
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Administrar usuarios</li>
+      <li class="active">Administrar becas</li>
     
     </ol>
 
@@ -24,9 +24,9 @@
 
       <div class="box-header with-border">
   
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarLiga">
           
-          Agregar usuario
+          Agregar becas
 
         </button>
 
@@ -42,10 +42,9 @@
            
            <th style="width:5px"></th>
            <th>Nombre</th>
-           <th>Usuario</th>
-           <th>Perfil</th>
-           <th>Estado</th>
-           <th>Último login</th>
+           <th>Deporte</th>
+           <th>Direccion</th>
+           <th>Telefono</th>
            <th>Acciones</th>
 
          </tr> 
@@ -59,36 +58,30 @@
         $item = null;
         $valor = null;
 
-        $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+        $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
 
-       foreach ($usuarios as $key => $value){
+       foreach ($ligas as $key => $value){
          
           echo ' <tr>
                   <td></td>
-                  <td>'.$value["nombre"].'</td>
-                  <td>'.$value["usuario"].'</td>';
+                  <td>'.$value["nombreliga"].'</td>
+                  <td>'.$value["deporte"].'</td>';
 
 
-                  echo '<td>'.$value["perfil"].'</td>';
+                  echo '<td>'.$value["direccion"].'</td>
+                  <td>'.$value["telefono"].'</td>';
 
-                  if($value["estado"] != 0){
 
-                    echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
-
-                  }else{
-
-                    echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
-
-                  }            
-
-                  echo '<td>'.$value["ultimo_login"].'</td>
+                  
+                  
+                  echo '
                   <td>
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-warning btnEditarLiga" idLiga="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarLiga"><i class="fa fa-pencil"></i></button>
 
-                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-danger btnEliminarLiga" idLiga="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                     </div>  
 
@@ -113,10 +106,10 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR USUARIO
+MODAL AGREGAR LIGA
 ======================================-->
 
-<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+<div id="modalAgregarLiga" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -132,7 +125,7 @@ MODAL AGREGAR USUARIO
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Agregar usuario</h4>
+          <h4 class="modal-title">Agregar liga</h4>
 
         </div>
 
@@ -158,56 +151,52 @@ MODAL AGREGAR USUARIO
 
             </div>
 
-            <!-- ENTRADA PARA EL USUARIO -->
-
-             <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
-
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" placeholder="Ingresar usuario" id="nuevoUsuario" required>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
-
-             <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
-
-                <input type="password" class="form-control input-lg" name="nuevoPassword" placeholder="Ingresar contraseña" required>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA EL DEPORTE -->
 
             <div class="form-group">
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-users"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <select class="form-control input-lg" name="nuevoPerfil">
-                  
-                  <option value="">Selecionar perfil</option>
-
-                  <option value="Administrador">Administrador</option>
-
-
-                  <option value="Entrenador">Entrenador</option>
-
-                </select>
+                <input type="text" class="form-control input-lg" name="nuevoDeporte" placeholder="Ingresar deporte" id="nuevoDeporte" required>
 
               </div>
 
             </div>
+
+            <!-- ENTRADA PARA LA DIRECCION -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar direccion" id="nuevaDireccion" required>
+
+              </div>
+
+            </div>
+
+
+          <!-- ENTRADA PARA EL TELEFONO -->
+
+              <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar telefono" id="nuevoTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+
+              </div>
+
+            </div>
+
+
+
+  
 
             
           </div>
@@ -222,14 +211,14 @@ MODAL AGREGAR USUARIO
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar usuario</button>
+          <button type="submit" class="btn btn-primary">Guardar liga</button>
 
         </div>
 
         <?php
 
-          $crearUsuario = new ControladorUsuarios();
-          $crearUsuario -> ctrCrearUsuario();
+          $crearLiga = new ControladorLigas();
+          $crearLiga -> ctrCrearLiga();
 
         ?>
 
@@ -242,10 +231,10 @@ MODAL AGREGAR USUARIO
 </div>
 
 <!--=====================================
-MODAL EDITAR USUARIO
+MODAL EDITAR LIGA
 ======================================-->
 
-<div id="modalEditarUsuario" class="modal fade" role="dialog">
+<div id="modalEditarLiga" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -261,7 +250,7 @@ MODAL EDITAR USUARIO
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar usuario</h4>
+          <h4 class="modal-title">Editar Liga</h4>
 
         </div>
 
@@ -283,65 +272,57 @@ MODAL EDITAR USUARIO
 
                 <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
 
+                <input type="hidden"  name="idLiga" id="idLiga" required>
+
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA EL USUARIO -->
+            <!-- ENTRADA PARA EL DEPORTE -->
 
              <div class="form-group">
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" readonly>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
-
-             <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
-
-                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
-
-                <input type="hidden" id="passwordActual" name="passwordActual">
+                <input type="text" class="form-control input-lg" id="editarDeporte" name="editarDeporte" value="" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA LA DIRECCION-->
 
             <div class="form-group">
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-users"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <select class="form-control input-lg" name="editarPerfil">
-                  
-                  <option value="" id="editarPerfil"></option>
-
-                  <option value="Administrador">Administrador</option>
-
-                  <!--<option value="Especial">Especial</option>-->
-
-                  <option value="Entrenador">Entrenador</option>
-
-                </select>
+                <input type="text" class="form-control input-lg" id="editarDireccion" name="editarDireccion" value="" required>
 
               </div>
 
             </div>
 
-            
+            <!-- ENTRADA PARA EL TELEFONO -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarTelefono" name="editarTelefono" value="" required>
+
+              </div>
+
+            </div>
+
+    
+
+                   
 
           </div>
 
@@ -355,14 +336,14 @@ MODAL EDITAR USUARIO
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Modificar usuario</button>
+          <button type="submit" class="btn btn-primary">Modificar liga</button>
 
         </div>
 
      <?php
 
-          $editarUsuario = new ControladorUsuarios();
-          $editarUsuario -> ctrEditarUsuario();
+          $editarLiga = new ControladorLigas();
+          $editarLiga -> ctrEditarLiga();
 
         ?> 
 
@@ -376,8 +357,8 @@ MODAL EDITAR USUARIO
 
 <?php
 
-  $borrarUsuario = new ControladorUsuarios();
-  $borrarUsuario -> ctrBorrarUsuario();
+  $borrarLiga = new ControladorLigas();
+  $borrarLiga -> ctrBorrarLiga();
 
 ?> 
 

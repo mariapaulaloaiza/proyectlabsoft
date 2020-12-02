@@ -4,7 +4,7 @@
     
     <h1>
       
-      Administrar usuarios
+      Administrar ligas
     
     </h1>
 
@@ -12,7 +12,7 @@
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Administrar usuarios</li>
+      <li class="active">Administrar ligas</li>
     
     </ol>
 
@@ -24,9 +24,9 @@
 
       <div class="box-header with-border">
   
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarLiga">
           
-          Agregar usuario
+          Agregar liga
 
         </button>
 
@@ -42,10 +42,9 @@
            
            <th style="width:5px"></th>
            <th>Nombre</th>
-           <th>Usuario</th>
-           <th>Perfil</th>
-           <th>Estado</th>
-           <th>Último login</th>
+           <th>Deporte</th>
+           <th>Direccion</th>
+           <th>Telefono</th>
            <th>Acciones</th>
 
          </tr> 
@@ -59,36 +58,26 @@
         $item = null;
         $valor = null;
 
-        $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+        $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
 
-       foreach ($usuarios as $key => $value){
-         
+        foreach ($ligas as $key => $value) {
+           
           echo ' <tr>
+
                   <td></td>
-                  <td>'.$value["nombre"].'</td>
-                  <td>'.$value["usuario"].'</td>';
 
+                  <td class="text-uppercase">'.$value["nombreliga"].'</td>
+                  <td class="text-uppercase">'.$value["deporte"].'</td>
+                  <td class="text-uppercase">'.$value["direccion"].'</td>
+                  <td class="text-uppercase">'.$value["telefono"].'</td>
 
-                  echo '<td>'.$value["perfil"].'</td>';
-
-                  if($value["estado"] != 0){
-
-                    echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
-
-                  }else{
-
-                    echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
-
-                  }            
-
-                  echo '<td>'.$value["ultimo_login"].'</td>
                   <td>
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-warning btnEditarLiga" idLiga="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarLiga"><i class="fa fa-pencil"></i></button>
 
-                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-danger btnEliminarLiga" idLiga="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                     </div>  
 
@@ -116,7 +105,7 @@
 MODAL AGREGAR USUARIO
 ======================================-->
 
-<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+<div id="modalAgregarLiga" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -132,7 +121,7 @@ MODAL AGREGAR USUARIO
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Agregar usuario</h4>
+          <h4 class="modal-title">Agregar Liga</h4>
 
         </div>
 
@@ -152,7 +141,7 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" name="nuevaLiga" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -166,7 +155,7 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" placeholder="Ingresar usuario" id="nuevoUsuario" required>
+                <input type="text" class="form-control input-lg" name="nuevoDeporte" placeholder="Ingresar deporte" id="nuevoDeporte" required>
 
               </div>
 
@@ -180,13 +169,26 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 
-                <input type="password" class="form-control input-lg" name="nuevoPassword" placeholder="Ingresar contraseña" required>
+                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA EL TELEFONO -->
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU PERFIL 
 
             <div class="form-group">
               
@@ -207,7 +209,7 @@ MODAL AGREGAR USUARIO
 
               </div>
 
-            </div>
+            </div> -->
 
             
           </div>
@@ -222,16 +224,16 @@ MODAL AGREGAR USUARIO
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar usuario</button>
+          <button type="submit" class="btn btn-primary">Guardar liga</button>
 
         </div>
 
-        <?php
+      <?php
 
-          $crearUsuario = new ControladorUsuarios();
-          $crearUsuario -> ctrCrearUsuario();
+          $editarLiga = new ControladorLigas();
+          $editarLiga -> ctrCrearLiga();
 
-        ?>
+        ?> 
 
       </form>
 
@@ -245,7 +247,7 @@ MODAL AGREGAR USUARIO
 MODAL EDITAR USUARIO
 ======================================-->
 
-<div id="modalEditarUsuario" class="modal fade" role="dialog">
+<div id="modalEditarLiga" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -261,7 +263,7 @@ MODAL EDITAR USUARIO
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar usuario</h4>
+          <h4 class="modal-title">Editar Liga</h4>
 
         </div>
 
@@ -281,7 +283,7 @@ MODAL EDITAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+                <input type="text" class="form-control input-lg" id="editarLiga" name="editarLiga" value="" required>
 
               </div>
 
@@ -295,13 +297,13 @@ MODAL EDITAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" readonly>
+                <input type="text" class="form-control input-lg" id="editarDeporte" name="editarDeporte" value="" readonly>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
+            <!-- ENTRADA PARA LA CONTRASEÑA 
 
              <div class="form-group">
               
@@ -315,9 +317,9 @@ MODAL EDITAR USUARIO
 
               </div>
 
-            </div>
+            </div> 
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            ENTRADA PARA SELECCIONAR SU PERFIL 
 
             <div class="form-group">
               
@@ -331,7 +333,7 @@ MODAL EDITAR USUARIO
 
                   <option value="Administrador">Administrador</option>
 
-                  <!--<option value="Especial">Especial</option>-->
+                  <option value="Especial">Especial</option>
 
                   <option value="Entrenador">Entrenador</option>
 
@@ -339,7 +341,37 @@ MODAL EDITAR USUARIO
 
               </div>
 
+            </div> -->
+
+          <!-- ENTRADA PARA EL USUARIO -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarDireccion" name="editarDireccion" value="" readonly>
+
+              </div>
+
             </div>
+
+
+            <!-- ENTRADA PARA EL USUARIO -->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarTelefono" name="editarTelefono" value="" readonly>
+
+              </div>
+
+            </div>
+
 
             
 
@@ -355,14 +387,14 @@ MODAL EDITAR USUARIO
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Modificar usuario</button>
+          <button type="submit" class="btn btn-primary">Modificar liga</button>
 
         </div>
 
      <?php
 
-          $editarUsuario = new ControladorUsuarios();
-          $editarUsuario -> ctrEditarUsuario();
+          $editarUsuario = new ControladorLigas();
+          $editarUsuario -> ctrEditarLiga();
 
         ?> 
 
@@ -376,9 +408,9 @@ MODAL EDITAR USUARIO
 
 <?php
 
-  $borrarUsuario = new ControladorUsuarios();
-  $borrarUsuario -> ctrBorrarUsuario();
+  $borrarLiga = new ControladorLigas();
+  $borrarLiga -> ctrBorrarLiga();
 
-?> 
+?>
 
 

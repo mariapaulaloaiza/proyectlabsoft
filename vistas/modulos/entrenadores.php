@@ -47,7 +47,6 @@
            <th>Celular</th>
            <th>Email</th>
            <th>Deporte orientado</th>
-           <th>Liga</th>
 
            <th>Acciones</th>
 
@@ -73,8 +72,7 @@
                   <td>'.$value["edad"].'</td>
                   <td>'.$value["celular"].'</td>
                   <td>'.$value["email"].'</td>
-                  <td>'.$value["deporte"].'</td>
-                  <td>'.$value["liga"].'</td>';
+                  <td>'.$value["deporte"].'</td>';
 
 
                   /*echo '<td>'.$value["direccion"].'</td>
@@ -226,38 +224,6 @@ MODAL AGREGAR ENTRENADOR
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
                 <input type="text" class="form-control input-lg" name="nuevoDeporte" placeholder="Ingresar deporte orientado" id="nuevoDeporte" required>
-
-              </div>
-
-          </div>
-
-          <!-- ENTRADA PARA EL LIGA -->
-            
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="nuevaLiga" name="nuevaLiga" required>
-                  
-                  <option value="">Selecionar liga</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
-
-                  foreach ($ligas as $key => $value) {
-                    
-                    echo '<option value="'.$value["nombreliga"].'">'.$value["nombreliga"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
 
               </div>
 
@@ -416,46 +382,11 @@ MODAL EDITAR ENTRENADOR
 
             </div>
 
-            <!-- ENTRADA PARA EL LIGA -->
-            
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="editarLiga" name="editarLiga" required>
-                  
-                  <option value="">Selecionar liga</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
-
-                  foreach ($ligas as $key => $value) {
-                    
-                    echo '<option value="'.$value["nombreliga"].'">'.$value["nombreliga"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-          </div>
-
-
             
 
           
 
-        
-
-            
+    
 
           </div>
 

@@ -3,6 +3,10 @@
 require_once "../controladores/entrenadores.controlador.php";
 require_once "../modelos/entrenadores.modelo.php";
 
+require_once "../controladores/ligas.controlador.php";
+require_once "../modelos/ligas.modelo.php";
+
+
 class AjaxEntrenadores{
 
 	/*=============================================

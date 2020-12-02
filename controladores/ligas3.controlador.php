@@ -1,22 +1,28 @@
 <?php
 
-class ControladorCategorias{
+class ControladorLigas{
 
 	/*=============================================
 	CREAR CATEGORIAS
 	=============================================*/
 
-	static public function ctrCrearCategoria(){
+	static public function ctrCrearLiga(){
 
-		if(isset($_POST["nuevaCategoria"])){
+		if(isset($_POST["nuevaLiga"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\- ]+$/', $_POST["nuevaCategoria"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\- ]+$/', $_POST["nuevaLiga"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\- ]+$/', $_POST["nuevoDeporte"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\- ]+$/', $_POST["nuevaDireccion"])&&
+				preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"])){
 
-				$tabla = "categorias";
+				$tabla = "ligas";
 
-				$datos = $_POST["nuevaCategoria"];
+				$datos = array("nombreliga"=>$_POST["nuevaLiga"],
+								"deporte"=>$_POST["nuevoDeporte"],
+								"direccion"=>$_POST["nuevaDireccion"],
+								"telefono"=>$_POST["nuevoTelefono"]);
 
-				$respuesta = ModeloCategorias::mdlIngresarCategoria($tabla, $datos);
+				$respuesta = ModeloLigas::mdlIngresarLigas($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -30,7 +36,7 @@ class ControladorCategorias{
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "categorias";
+									window.location = "ligas";
 
 									}
 								})
@@ -52,7 +58,7 @@ class ControladorCategorias{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "categorias";
+							window.location = "ligas";
 
 							}
 						})
@@ -69,11 +75,11 @@ class ControladorCategorias{
 	MOSTRAR CATEGORIAS
 	=============================================*/
 
-	static public function ctrMostrarCategorias($item, $valor){
+	static public function ctrMostrarLigas($item, $valor){
 
-		$tabla = "categorias";
+		$tabla = "ligas";
 
-		$respuesta = ModeloCategorias::mdlMostrarCategorias($tabla, $item, $valor);
+		$respuesta = ModeloLigas::mdlMostrarLigas($tabla, $item, $valor);
 
 		return $respuesta;
 	
@@ -83,18 +89,25 @@ class ControladorCategorias{
 	EDITAR CATEGORIA
 	=============================================*/
 
-	static public function ctrEditarCategoria(){
+	static public function ctrEditarLiga(){
 
-		if(isset($_POST["editarCategoria"])){
+		if(isset($_POST["editarLiga"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\- ]+$/', $_POST["editarCategoria"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarLiga"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDeporte"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDireccion"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarTelefono"])){
 
-				$tabla = "categorias";
+				$tabla = "ligas";
 
-				$datos = array("categoria"=>$_POST["editarCategoria"],
-							   "id"=>$_POST["idCategoria"]);
+				$datos = array("nombreliga"=>$_POST["editarLiga"],
+								"deporte"=>$_POST["editarDeporte"],
+								"direccion"=>$_POST["editarDireccion"],
+								"telefono"=>$_POST["editarTelefono"],
 
-				$respuesta = ModeloCategorias::mdlEditarCategoria($tabla, $datos);
+							   "id"=>$_POST["idLiga"]);
+
+				$respuesta = ModeloLigas::mdlEditarLiga($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -108,7 +121,7 @@ class ControladorCategorias{
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "categorias";
+									window.location = "ligas";
 
 									}
 								})
@@ -130,7 +143,7 @@ class ControladorCategorias{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "categorias";
+							window.location = "ligas";
 
 							}
 						})
@@ -147,14 +160,14 @@ class ControladorCategorias{
 	BORRAR CATEGORIA
 	=============================================*/
 
-	static public function ctrBorrarCategoria(){
+	static public function ctrBorrarLiga(){
 
-		if(isset($_GET["idCategoria"])){
+		if(isset($_GET["idLiga"])){
 
-			$tabla ="Categorias";
-			$datos = $_GET["idCategoria"];
+			$tabla ="ligas";
+			$datos = $_GET["idLiga"];
 
-			$respuesta = ModeloCategorias::mdlBorrarCategoria($tabla, $datos);
+			$respuesta = ModeloLigas::mdlBorrarLiga($tabla, $datos);
 
 			if($respuesta == "ok"){
 
@@ -168,7 +181,7 @@ class ControladorCategorias{
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "categorias";
+									window.location = "ligas";
 
 									}
 								})

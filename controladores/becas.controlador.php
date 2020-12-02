@@ -1,13 +1,13 @@
 <?php
 
-class ControladorLigas{ 
+class ControladorBecas{ 
 
 
 	/*=============================================
-	REGISTRO DE LIGAS
+	REGISTRO DE BECAS
 	=============================================*/
 
-	static public function ctrCrearLiga(){
+	static public function ctrCrearBeca(){
 
 		if(isset($_POST["nuevoNombre"])){
 
@@ -88,14 +88,14 @@ class ControladorLigas{
 	}
 
 	/*=============================================
-	MOSTRAR LIGA
+	MOSTRAR BECAS
 	=============================================*/
 
-	static public function ctrMostrarLigas($item, $valor){
+	static public function ctrMostrarBecas($item, $valor){
 
 		$tabla = "ligas";
 
-		$respuesta = ModeloLigas::MdlMostrarLigas($tabla, $item, $valor);
+		$respuesta = ModeloLigas::MdlMostrarbecas($tabla, $item, $valor);
 
 		return $respuesta;
 	}
@@ -104,7 +104,7 @@ class ControladorLigas{
 	EDITAR LIGA
 	=============================================*/
 
-	static public function ctrEditarLiga(){
+	static public function ctrEditarbeca(){
 
 		if(isset($_POST["editarNombre"])){
 
@@ -173,10 +173,10 @@ class ControladorLigas{
 	}
 
 	/*=============================================
-	BORRAR LIGA
+	BORRAR BECA
 	=============================================*/
 
-	static public function ctrBorrarLiga(){
+	static public function ctrBorrarBeca(){
 
 		if(isset($_GET["idLiga"])){
 

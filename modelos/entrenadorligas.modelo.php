@@ -2,13 +2,13 @@
 
 require_once "conexion.php";
 
-class ModeloLigas{
+class ModeloEntrenadorLigas{
 
 	/*=============================================
-	MOSTRAR USUARIOS
+	MOSTRAR 
 	=============================================*/
 
-	static public function mdlMostrarLigas($tabla, $item, $valor){
+	static public function mdlMostrarEntrenadorLigas($tabla, $item, $valor){
 
 		if($item != null){
 
@@ -37,22 +37,16 @@ class ModeloLigas{
 
 	}
 
-	
-
-
 	/*=============================================
-	REGISTRO DE USUARIO
+	REGISTRO 
 	=============================================*/
 
-	static public function mdlIngresarLiga($tabla, $datos){
+	static public function mdlIngresarEntrenadorLiga($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombreliga, deporte, direccion, telefono) VALUES (:nombreliga, :deporte, :direccion, :telefono)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(entrenador, catliga) VALUES (:entrenador, :catliga)");
 
-		$stmt->bindParam(":nombreliga", $datos["nombreliga"], PDO::PARAM_STR);
-		$stmt->bindParam(":deporte", $datos["deporte"], PDO::PARAM_STR);
-		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
-		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-		
+		$stmt->bindParam(":entrenador", $datos["entrenador"], PDO::PARAM_STR);
+		$stmt->bindParam(":catliga", $datos["catliga"], PDO::PARAM_STR);
 		
 
 		if($stmt->execute()){
@@ -72,17 +66,15 @@ class ModeloLigas{
 	}
 
 	/*=============================================
-	EDITAR USUARIO
+	EDITAR 
 	=============================================*/
 
-	static public function mdlEditarLiga($tabla, $datos){
+	static public function mdlEditarEntrenadorLiga($tabla, $datos){
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombreliga = :nombreliga, deporte = :deporte, direccion = :direccion, telefono = :telefono  WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET entrenador = :entrenador, catliga = :catliga  WHERE id = :id");
 
-		$stmt -> bindParam(":nombreliga", $datos["nombreliga"], PDO::PARAM_STR);
-		$stmt -> bindParam(":deporte", $datos["deporte"], PDO::PARAM_STR);
-		$stmt -> bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
-		$stmt -> bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt -> bindParam(":entrenador", $datos["entrenador"], PDO::PARAM_STR);
+		$stmt -> bindParam(":catliga", $datos["catliga"], PDO::PARAM_STR);
 		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_STR);
 
 		if($stmt -> execute()){
@@ -129,10 +121,10 @@ class ModeloLigas{
 	}
 
 	/*=============================================
-	BORRAR USUARIO
+	BORRAR 
 	=============================================*/
 
-	static public function mdlBorrarLiga($tabla, $datos){
+	static public function mdlBorrarEntrenadorLiga($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 

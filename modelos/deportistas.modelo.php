@@ -35,7 +35,10 @@ class ModeloDeportista{
 
 		$stmt = null;
 
-	}
+	} 
+
+	
+
 
 	/*=============================================
 	REGISTRO DE DEPORTISTA

@@ -2,13 +2,13 @@
 
 require_once "conexion.php";
 
-class ModeloLigas{
+class ModeloBecas{
 
 	/*=============================================
 	MOSTRAR USUARIOS
 	=============================================*/
 
-	static public function mdlMostrarLigas($tabla, $item, $valor){
+	static public function mdlMostrarBecas($tabla, $item, $valor){
 
 		if($item != null){
 
@@ -44,7 +44,7 @@ class ModeloLigas{
 	REGISTRO DE USUARIO
 	=============================================*/
 
-	static public function mdlIngresarLiga($tabla, $datos){
+	static public function mdlIngresarBeca($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombreliga, deporte, direccion, telefono) VALUES (:nombreliga, :deporte, :direccion, :telefono)");
 
@@ -75,7 +75,7 @@ class ModeloLigas{
 	EDITAR USUARIO
 	=============================================*/
 
-	static public function mdlEditarLiga($tabla, $datos){
+	static public function mdlEditarBeca($tabla, $datos){
 	
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombreliga = :nombreliga, deporte = :deporte, direccion = :direccion, telefono = :telefono  WHERE id = :id");
 
@@ -103,7 +103,7 @@ class ModeloLigas{
 
 	/*=============================================
 	ACTUALIZAR USUARIO
-	=============================================*/
+	=============================================
 
 	static public function mdlActualizarLiga($tabla, $item1, $valor1, $item2, $valor2){
 
@@ -126,13 +126,13 @@ class ModeloLigas{
 
 		$stmt = null;
 
-	}
+	}*/
 
 	/*=============================================
 	BORRAR USUARIO
 	=============================================*/
 
-	static public function mdlBorrarLiga($tabla, $datos){
+	static public function mdlBorrarBeca($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 

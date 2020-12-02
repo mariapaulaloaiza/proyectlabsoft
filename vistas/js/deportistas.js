@@ -32,8 +32,8 @@ $(".tablas").on("click", ".btnEditarDeportista", function(){
               dataType:"json",
               success:function(respuesta){
                   
-                  $("#editarLiga").val(respuesta["id"]);
-                  $("#editarLiga").html(respuesta["nombreliga"]);
+                  /*$("#editarLiga").val(respuesta["id"]);*/
+                  $("#verliga").val(respuesta["nombreliga"]);
 
               }
 

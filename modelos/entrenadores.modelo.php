@@ -43,7 +43,7 @@ class ModeloEntrenador{
 
 	static public function mdlIngresarEntrenador($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, documento, edad, celular, email, deporte, liga) VALUES (:nombre, :documento, :edad, :celular, :email, :deporte, :liga)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, documento, edad, celular, email, deporte) VALUES (:nombre, :documento, :edad, :celular, :email, :deporte)");
 
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
@@ -51,7 +51,6 @@ class ModeloEntrenador{
 		$stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
 		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
 		$stmt->bindParam(":deporte", $datos["deporte"], PDO::PARAM_STR);
-		$stmt->bindParam(":liga", $datos["liga"], PDO::PARAM_STR);
 		
 
 		if($stmt->execute()){
@@ -76,7 +75,7 @@ class ModeloEntrenador{
 
 	static public function mdlEditarEntrenador($tabla, $datos){
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, documento = :documento, edad = :edad, celular = :celular, email = :email, deporte = :deporte, liga = :liga WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, documento = :documento, edad = :edad, celular = :celular, email = :email, deporte = :deporte WHERE id = :id");
 
 		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt -> bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
@@ -84,7 +83,6 @@ class ModeloEntrenador{
 		$stmt -> bindParam(":celular", $datos["celular"], PDO::PARAM_STR);
 		$stmt -> bindParam(":email", $datos["email"], PDO::PARAM_STR);
 		$stmt -> bindParam(":deporte", $datos["deporte"], PDO::PARAM_STR);
-		$stmt->bindParam(":liga", $datos["liga"], PDO::PARAM_STR);
 		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_STR);
 
 		if($stmt -> execute()){
@@ -105,7 +103,7 @@ class ModeloEntrenador{
 
 	/*=============================================
 	ACTUALIZAR USUARIO
-	=============================================*/
+	=============================================
 
 	static public function mdlActualizarEntrenador($tabla, $item1, $valor1, $item2, $valor2){
 
@@ -128,7 +126,7 @@ class ModeloEntrenador{
 
 		$stmt = null;
 
-	}
+	} */
 
 	/*=============================================
 	BORRAR USUARIO

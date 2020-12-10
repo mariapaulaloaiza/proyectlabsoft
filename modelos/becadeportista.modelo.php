@@ -22,7 +22,7 @@ class ModeloBecaDeportista{
 
 		}else{
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+			$stmt = Conexion::conectar()->prepare("SELECT becas.id as id, becas.beca as beca, deportistas.documento as deportista FROM becadeportista INNER JOIN becas on becas.id = becadeportista.beca INNER JOIN deportistas ON deportistas.id = becadeportista.deportista");
 
 			$stmt -> execute();
 
@@ -41,23 +41,15 @@ class ModeloBecaDeportista{
 	REGISTRO 
 	=============================================*/
 
-	static public function mdlIngresarBecaDeportista($tabla, $datos){
+	static public function mdlIngresarBecaDeportista($dato1, $dato2){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(liga, categoria) VALUES (:liga, :categoria)");
+		$tabla = "becadeportista";
 
-		$stmt->bindParam(":liga", $datos["liga"], PDO::PARAM_STR);
-		$stmt->bindParam(":categoria", $datos["categoria"], PDO::PARAM_STR);
-		
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(beca, deportista) VALUES ($dato1, $dato2)");
 
-		if($stmt->execute()){
+		$stmt -> execute();
 
-			return "ok";	
-
-		}else{
-
-			return "error";
-		
-		}
+		return $stmt -> fetch();
 
 		$stmt->close();
 		

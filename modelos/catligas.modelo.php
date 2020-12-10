@@ -2,6 +2,7 @@
 
 require_once "conexion.php";
 
+
 class ModeloCatLigas{
 
 	/*=============================================
@@ -36,7 +37,22 @@ class ModeloCatLigas{
 		$stmt = null;
 
 	}
+	
 
+	static public function mdlMostrarConsulta($tabla1, $tabla2, $tabla3,  $item, $valor){
+
+			$stmt = Conexion::conectar()->prepare("SELECT  $tabla1.id as id, $tabla2.nombreliga as liga, $tabla3.categoria as categoria FROM $tabla1 INNER JOIN $tabla2 on $tabla2.id = $tabla1.liga INNER JOIN $tabla3 ON $tabla3.id = $tabla1.categoria");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+	
+			$stmt -> close();
+
+			$stmt = null;
+
+	}
+	
 	/*=============================================
 	REGISTRO 
 	=============================================*/

@@ -5,7 +5,7 @@ require_once "conexion.php";
 class ModeloBecas{
 
 	/*=============================================
-	MOSTRAR USUARIOS
+	MOSTRAR BECAS
 	=============================================*/
 
 	static public function mdlMostrarBecas($tabla, $item, $valor){
@@ -37,23 +37,41 @@ class ModeloBecas{
 
 	}
 
+	static public function mdlMostrarBecasFecha(){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM becas ORDER BY fecha DESC");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
 	
 
 
 	/*=============================================
-	REGISTRO DE USUARIO
+	REGISTRO DE BECAS
 	=============================================*/
 
 	static public function mdlIngresarBeca($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombreliga, deporte, direccion, telefono) VALUES (:nombreliga, :deporte, :direccion, :telefono)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(beca, responsable, descripcion, edadMinima, edadMaxima, estratoMaximo, rendimientoMinimo, campeonatos, fecha) VALUES (:beca, :responsable, :descripcion, :edadMinima, :edadMaxima, :estratoMaximo, :rendimientoMinimo, :campeonatos, :fecha)");
 
-		$stmt->bindParam(":nombreliga", $datos["nombreliga"], PDO::PARAM_STR);
-		$stmt->bindParam(":deporte", $datos["deporte"], PDO::PARAM_STR);
-		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
-		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-		
-		
+		$stmt->bindParam(":beca", $datos["beca"], PDO::PARAM_STR);
+		$stmt->bindParam(":responsable", $datos["responsable"], PDO::PARAM_STR);
+		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":edadMinima", $datos["edadMinima"], PDO::PARAM_STR);
+		$stmt->bindParam(":edadMaxima", $datos["edadMaxima"], PDO::PARAM_STR);
+		$stmt->bindParam(":estratoMaximo", $datos["estratoMaximo"], PDO::PARAM_STR);
+		$stmt->bindParam(":rendimientoMinimo", $datos["rendimientoMinimo"], PDO::PARAM_STR);
+		$stmt->bindParam(":campeonatos", $datos["campeonatos"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
+				
 
 		if($stmt->execute()){
 
@@ -72,17 +90,21 @@ class ModeloBecas{
 	}
 
 	/*=============================================
-	EDITAR USUARIO
+	EDITAR BECAS
 	=============================================*/
 
 	static public function mdlEditarBeca($tabla, $datos){
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombreliga = :nombreliga, deporte = :deporte, direccion = :direccion, telefono = :telefono  WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET beca = :beca, responsable = :responsable, descripcion = :descripcion, edadMinima = :edadMinima, edadMaxima = :edadMaxima, estratoMaximo = :estratoMaximo, rendimientoMinimo = :rendimientoMinimo, campeonatos = :campeonatos WHERE id = :id");
 
-		$stmt -> bindParam(":nombreliga", $datos["nombreliga"], PDO::PARAM_STR);
-		$stmt -> bindParam(":deporte", $datos["deporte"], PDO::PARAM_STR);
-		$stmt -> bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
-		$stmt -> bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt -> bindParam(":beca", $datos["beca"], PDO::PARAM_STR);
+		$stmt -> bindParam(":responsable", $datos["responsable"], PDO::PARAM_STR);
+		$stmt -> bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+		$stmt -> bindParam(":edadMinima", $datos["edadMinima"], PDO::PARAM_STR);
+		$stmt -> bindParam(":edadMaxima", $datos["edadMaxima"], PDO::PARAM_STR);
+		$stmt -> bindParam(":estratoMaximo", $datos["estratoMaximo"], PDO::PARAM_STR);
+		$stmt -> bindParam(":rendimientoMinimo", $datos["rendimientoMinimo"], PDO::PARAM_STR);
+		$stmt -> bindParam(":campeonatos", $datos["campeonatos"], PDO::PARAM_STR);
 		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_STR);
 
 		if($stmt -> execute()){
@@ -129,7 +151,7 @@ class ModeloBecas{
 	}*/
 
 	/*=============================================
-	BORRAR USUARIO
+	BORRAR BECA
 	=============================================*/
 
 	static public function mdlBorrarBeca($tabla, $datos){

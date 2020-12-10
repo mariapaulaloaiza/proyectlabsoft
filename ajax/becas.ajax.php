@@ -1,7 +1,7 @@
 <?php
 
-require_once "../controladores/ligas.controlador.php";
-require_once "../modelos/ligas.modelo.php";
+require_once "../controladores/becas.controlador.php";
+require_once "../modelos/becas.modelo.php";
 
 class AjaxBecas{
 
@@ -9,14 +9,14 @@ class AjaxBecas{
 	EDITAR BECA
 	=============================================*/	
 
-	public $idLiga;
+	public $idBeca;
 
-	public function ajaxEditarLiga(){
+	public function ajaxEditarBeca(){
 
 		$item = "id";
-		$valor = $this->idLiga;
+		$valor = $this->idBeca;
 
-		$respuesta = ControladorLigas::ctrMostrarLigas($item, $valor);
+		$respuesta = ControladorBecas::ctrMostrarBecas($item, $valor);
 
 		echo json_encode($respuesta);
 
@@ -26,9 +26,9 @@ class AjaxBecas{
 /*=============================================
 EDITAR BECA
 =============================================*/	
-if(isset($_POST["idLiga"])){
+if(isset($_POST["idBeca"])){
 
-	$liga = new AjaxLigas();
-	$liga -> idLiga = $_POST["idLiga"];
-	$liga -> ajaxEditarLiga();
+	$beca = new AjaxBecas();
+	$beca -> idBeca = $_POST["idBeca"];
+	$beca -> ajaxEditarBeca();
 }

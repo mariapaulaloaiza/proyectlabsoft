@@ -16,7 +16,7 @@ class AjaxCatLigas{
 		$item = "id";
 		$valor = $this->idCatLiga;
 
-		$respuesta = ControladorCatLigas::ctrMostrarCatLigas($item, $valor);
+		$respuesta = ControladorCatLigas::ctrMostrarCatLigas1($item, $valor);
 
 		echo json_encode($respuesta);
 

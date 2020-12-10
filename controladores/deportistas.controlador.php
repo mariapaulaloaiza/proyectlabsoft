@@ -17,7 +17,8 @@ class ControladorDeportistas{
 			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoCelular"])&&
 			   preg_match('/^[0-9 ]+$/', $_POST["nuevoEstrato"]) &&
 			   preg_match('/^[0-9 ]+$/', $_POST["nuevoRendimiento"]) &&
-			   #preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"])&& 
+			   #preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"])&&
+			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoCampeonato"]) && 
 			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaFalta"]) &&
 			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaObservacion"])){
 
@@ -28,9 +29,9 @@ class ControladorDeportistas{
 					           "documento" => $_POST["nuevoDocumento"],
 					           "edad" => $_POST["nuevaEdad"],
 							   "celular" => $_POST["nuevoCelular"],
-							   "liga" => $_POST["nuevaLiga"],
 							   "estrato" => $_POST["nuevoEstrato"],
 							   "rendimiento" => $_POST["nuevoRendimiento"],
+							   "campeonatos" => $_POST["nuevoCampeonato"],
 							   "faltas" => $_POST["nuevaFalta"],
 							   "observaciones" => $_POST["nuevaObservacion"]);
 					           
@@ -125,6 +126,7 @@ class ControladorDeportistas{
 				preg_match('/^[0-9 ]+$/', $_POST["editarEstrato"]) &&
 				preg_match('/^[0-9 ]+$/', $_POST["editarRendimiento"]) &&
 				#preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["editarEmail"])&& 
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCampeonato"]) &&
 				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarFalta"]) &&
 			   	preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarObservacion"])){
 
@@ -138,9 +140,9 @@ class ControladorDeportistas{
 							   "documento" => $_POST["editarDocumento"],
 							   "edad" => $_POST["editarEdad"],
 							   "celular" => $_POST["editarCelular"],
-							   "liga" => $_POST["editarLiga"],
 							   "estrato" => $_POST["editarEstrato"],
 							   "rendimiento" => $_POST["editarRendimiento"],
+							   "campeonatos" => $_POST["editarCampeonato"],
 							   "faltas" => $_POST["editarFalta"],
 							   "observaciones" => $_POST["editarObservacion"],
 							   "id"=>$_POST["idDeportista"]);

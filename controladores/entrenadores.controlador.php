@@ -26,8 +26,7 @@ class ControladorEntrenadores{
 					           "edad" => $_POST["nuevaEdad"],
 							   "celular" => $_POST["nuevoCelular"],
 							   "email" => $_POST["nuevoEmail"],
-							   "deporte" => $_POST["nuevoDeporte"],
-							   "liga" => $_POST["nuevaLiga"],
+							   "deporte" => $_POST["nuevoDeporte"]
 							);
 					           
 
@@ -68,7 +67,7 @@ class ControladorEntrenadores{
 					swal({
 
 						type: "error",
-						title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
+						title: "¡Los campos no pueden ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -133,7 +132,6 @@ class ControladorEntrenadores{
 							   "celular" => $_POST["editarCelular"],
 							   "email" => $_POST["editarEmail"],
 							   "deporte" => $_POST["editarDeporte"],
-							   "liga" => $_POST["editarLiga"],
 							   "id"=>$_POST["idEntrenador"]);
 							
 

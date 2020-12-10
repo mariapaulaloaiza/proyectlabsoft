@@ -1,36 +1,29 @@
 <?php
 
-
-/*require_once "../controladores/ligas.controlador.php";
-require_once "../modelos/ligas.modelo.php"; 
-
-require_once "../controladores/categorias.controlador.php";
-require_once "../modelos/categorias.modelo.php"; */
-
-class ControladorCatLigas{ 
+class ControladorDeportistaLigas{ 
 
 
 	/*=============================================
 	REGISTRO DE USUARIO
 	=============================================*/
 
-	static public function ctrCrearCatLiga(){
+	static public function ctrCrearDeportistaLiga(){
 
-		if(isset($_POST["nuevaLiga"])){
+		if(isset($_POST["nuevoDeportista"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaLiga"]) &&
-			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevaCategoria"]) 
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCatLiga"]) &&
+			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoDeportista"]) 
 			  
 			   ){
 
 
-				$tabla = "catligas";
+				$tabla = "deportistaliga";
 
-				$datos = array("liga" => $_POST["nuevaLiga"],
-					           "categoria" => $_POST["nuevaCategoria"]);
+				$datos = array("deportista" => $_POST["nuevoDeportista"],
+							"catliga" => $_POST["nuevaCatLiga"]);
 					           
 
-				$respuesta = ModeloCatLigas::mdlIngresarCatLiga($tabla, $datos);
+				$respuesta = ModeloDeportistaLigas::mdlIngresarDeportistaLiga($tabla, $datos);
 			
 				if($respuesta == "ok"){
 
@@ -39,7 +32,7 @@ class ControladorCatLigas{
 					swal({
 
 						type: "success",
-						title: "¡El registro se ha guardado correctamente!",
+						title: "¡El registro ha sido guardado correctamente!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -47,7 +40,7 @@ class ControladorCatLigas{
 
 						if(result.value){
 						
-							window.location = "catligas";
+							window.location = "deportistaligas";
 
 						}
 
@@ -75,7 +68,7 @@ class ControladorCatLigas{
 
 						if(result.value){
 						
-							window.location = "catligas";
+							window.location = "deportistaligas";
 
 						}
 
@@ -96,49 +89,43 @@ class ControladorCatLigas{
 	MOSTRAR USUARIO
 	=============================================*/
 
-	static public function ctrMostrarCatLigas($item, $valor){
+	static public function ctrMostrarDeportistaLigas($item, $valor){
 
-		$tabla1 = "catligas";
-		$tabla2 = "ligas";
-		$tabla3 = "categorias";
+		$tabla = "deportistaliga";
 
-		$respuesta = ModeloCatLigas::MdlMostrarConsulta($tabla1, $tabla2, $tabla3, $item, $valor);
+		$respuesta = ModeloDeportistaLigas::MdlMostrarDeportistaLigas($tabla, $item, $valor);
 
 		return $respuesta;
 	}
 
-	static public function ctrMostrarCatLigas1($item, $valor){
+	/*static public function ctrMostrarEntrenadorLigas1($item, $valor){
 
-		$tabla = "catligas";
+		$tabla = "entrenadorliga";
 
-		$respuesta = ModeloCatLigas::MdlMostrarCatLigas($tabla, $item, $valor);
+		$respuesta = ModeloEntrenadorLigas::MdlMostrarEntrenadorLigas1($tabla, $item, $valor);
 
 		return $respuesta;
-	}
-
-	
-
+	} */
 
 	/*=============================================
 	EDITAR USUARIO
 	=============================================*/
 
-	static public function ctrEditarCatLiga(){
+	static public function ctrEditarDeportistaLiga(){
 
-		if(isset($_POST["editarLiga"])){
+		if(isset($_POST["editarDeportista"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarLiga"]) &&
-			preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarCategoria"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDeportista"])){
 
 
-				$tabla = "catligas";
+				$tabla = "deportistaliga";
 
-				$datos = array("liga" => $_POST["editarLiga"],
-							   "categoria" => $_POST["editarCategoria"],
-							   "id"=>$_POST["idCatLiga"]);
+				$datos = array( "deportista" => $_POST["editarDeportista"],
+								"catliga" => $_POST["editarCatLiga"],
+							   "id"=>$_POST["idDeportistaLiga"]);
 							
 
-				$respuesta = ModeloCatLigas::mdlEditarCatLiga($tabla, $datos);
+				$respuesta = ModeloDeportistaLigas::mdlEditarDeportistaLiga($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -152,7 +139,7 @@ class ControladorCatLigas{
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "catligas";
+									window.location = "deportistaligas";
 
 									}
 								})
@@ -168,13 +155,13 @@ class ControladorCatLigas{
 
 					swal({
 						  type: "error",
-						  title: "¡Los datos no pueden ir vacío o llevar caracteres especiales!",
+						  title: "¡Los datos no puede ir vacío o llevar caracteres especiales!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "catligas";
+							window.location = "deportistaligas";
 
 							}
 						})
@@ -188,18 +175,18 @@ class ControladorCatLigas{
 	}
 
 	/*=============================================
-	BORRAR USUARIO
+	BORRAR 
 	=============================================*/
 
-	static public function ctrBorrarCatLiga(){
+	static public function ctrBorrarDeportistaLiga(){
 
-		if(isset($_GET["idCatLiga"])){
+		if(isset($_GET["idDeportistaLiga"])){
 
-			$tabla ="catligas";
-			$datos = $_GET["idCatLiga"];
+			$tabla ="deportistaliga";
+			$datos = $_GET["idDeportistaLiga"];
 
 
-			$respuesta = ModeloCatLigas::mdlBorrarCatLiga($tabla, $datos);
+			$respuesta = ModeloDeportistaLigas::mdlBorrarDeportistaLiga($tabla, $datos);
 
 			if($respuesta == "ok"){
 
@@ -213,7 +200,7 @@ class ControladorCatLigas{
 					  }).then(function(result){
 								if (result.value) {
 
-								window.location = "catligas";
+								window.location = "deportistaligas";
 
 								}
 							})

@@ -5,22 +5,22 @@ class ControladorBecaDeportista{
 
 	/*=============================================
 	REGISTRO 
-	=============================================*/
+	============================================= 
 
-	static public function ctrCrearBecaDeportista(){
+	static public function ctrCrearBecaDeportista($beca){
 
-		if(isset($_POST["nuevaLiga"])){
-
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaLiga"]) &&
-			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevaCategoria"]) 
-			  
-			   ){
+		
 
 
 				$tabla = "catligas";
 
 				$datos = array("liga" => $_POST["nuevaLiga"],
-					           "categoria" => $_POST["nuevaCategoria"]);
+							   "categoria" => $_POST["nuevaCategoria"]); 
+				
+
+
+				
+				$deportitas = ModeloDeportista:: mdlMostrarConsultaD($tabla, $datos);
 					           
 
 				$respuesta = ModeloCatLigas::mdlIngresarCatLiga($tabla, $datos);
@@ -80,10 +80,10 @@ class ControladorBecaDeportista{
 			}
 
 
-		}
+		
 
 
-	}
+	} */
 
 	/*=============================================
 	MOSTRAR 
@@ -100,7 +100,7 @@ class ControladorBecaDeportista{
 
 	/*=============================================
 	EDITAR 
-	=============================================*/
+	=============================================
 
 	static public function ctrEditarBecaDeportista(){
 
@@ -164,21 +164,21 @@ class ControladorBecaDeportista{
 
 		}
 
-	}
+	} */
 
 	/*=============================================
 	BORRAR 
-	=============================================*/
+	============================================= */
 
 	static public function ctrBorrarBecaDeportista(){
 
-		if(isset($_GET["idCatLiga"])){
+		if(isset($_GET["idBecaDeportista"])){
 
-			$tabla ="catligas";
-			$datos = $_GET["idCatLiga"];
+			$tabla ="becadeportista";
+			$datos = $_GET["idBecaDeportista"];
 
 
-			$respuesta = ModeloCatLigas::mdlBorrarCatLiga($tabla, $datos);
+			$respuesta = ModeloBecaDeportista::mdlBorrarBecaDeportista($tabla, $datos);
 
 			if($respuesta == "ok"){
 
@@ -186,13 +186,13 @@ class ControladorBecaDeportista{
 
 				swal({
 					  type: "success",
-					  title: "El usuario ha sido borrado correctamente",
+					  title: "La asignación de beca ha sido borrado correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
 								if (result.value) {
 
-								window.location = "catligas";
+								window.location = "becadeportista";
 
 								}
 							})

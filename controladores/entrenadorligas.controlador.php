@@ -9,18 +9,18 @@ class ControladorEntrenadorLigas{
 
 	static public function ctrCrearEntrenadorLiga(){
 
-		if(isset($_POST["nuevaLiga"])){
+		if(isset($_POST["nuevoEntrenador"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaLiga"]) &&
-			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoEntrenador"]) 
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCatLiga"]) &&
+			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoEntrenador"]) 
 			  
 			   ){
 
 
 				$tabla = "entrenadorliga";
 
-				$datos = array("liga" => $_POST["nuevaLiga"],
-					           "entrenador" => $_POST["nuevoEntrenador"]);
+				$datos = array("entrenador" => $_POST["nuevoEntrenador"],
+							"catliga" => $_POST["nuevaCatLiga"]);
 					           
 
 				$respuesta = ModeloEntrenadorLigas::mdlIngresarEntrenadorLiga($tabla, $datos);
@@ -32,7 +32,7 @@ class ControladorEntrenadorLigas{
 					swal({
 
 						type: "success",
-						title: "¡El usuario ha sido guardado correctamente!",
+						title: "¡El registro ha sido guardado correctamente!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -40,7 +40,7 @@ class ControladorEntrenadorLigas{
 
 						if(result.value){
 						
-							window.location = "catligas";
+							window.location = "entrenadorligas";
 
 						}
 
@@ -60,7 +60,7 @@ class ControladorEntrenadorLigas{
 					swal({
 
 						type: "error",
-						title: "¡El usuario no puede ir vacío o llevar caracteres especiales!",
+						title: "¡Los datos no puede ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -68,7 +68,7 @@ class ControladorEntrenadorLigas{
 
 						if(result.value){
 						
-							window.location = "catligas";
+							window.location = "entrenadorligas";
 
 						}
 
@@ -98,22 +98,30 @@ class ControladorEntrenadorLigas{
 		return $respuesta;
 	}
 
+	/*static public function ctrMostrarEntrenadorLigas1($item, $valor){
+
+		$tabla = "entrenadorliga";
+
+		$respuesta = ModeloEntrenadorLigas::MdlMostrarEntrenadorLigas1($tabla, $item, $valor);
+
+		return $respuesta;
+	} */
+
 	/*=============================================
 	EDITAR USUARIO
 	=============================================*/
 
 	static public function ctrEditarEntrenadorLiga(){
 
-		if(isset($_POST["editarLiga"])){
+		if(isset($_POST["editarEntrenador"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarLiga"]) &&
-			preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarEntrenador"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarEntrenador"])){
 
 
-				$tabla = "entrenadorligas";
+				$tabla = "entrenadorliga";
 
-				$datos = array("liga" => $_POST["editarLiga"],
-							   "entrenador" => $_POST["editarEntrenador"],
+				$datos = array( "entrenador" => $_POST["editarEntrenador"],
+								"catliga" => $_POST["editarCatLiga"],
 							   "id"=>$_POST["idEntrenadorLiga"]);
 							
 
@@ -125,7 +133,7 @@ class ControladorEntrenadorLigas{
 
 					swal({
 						  type: "success",
-						  title: "El usuario ha sido editado correctamente",
+						  title: "El registro ha sido editado correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -147,7 +155,7 @@ class ControladorEntrenadorLigas{
 
 					swal({
 						  type: "error",
-						  title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
+						  title: "¡Los datos no puede ir vacío o llevar caracteres especiales!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -174,7 +182,7 @@ class ControladorEntrenadorLigas{
 
 		if(isset($_GET["idEntrenadorLiga"])){
 
-			$tabla ="entrenadorligas";
+			$tabla ="entrenadorliga";
 			$datos = $_GET["idEntrenadorLiga"];
 
 
@@ -186,7 +194,7 @@ class ControladorEntrenadorLigas{
 
 				swal({
 					  type: "success",
-					  title: "El usuario ha sido borrado correctamente",
+					  title: "El registro ha sido borrado correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){

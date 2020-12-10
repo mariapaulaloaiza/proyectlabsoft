@@ -4,28 +4,62 @@ class ControladorBecas{
 
 
 	/*=============================================
-	REGISTRO DE BECAS
+	REGISTRO DE BECA
 	=============================================*/
 
-	static public function ctrCrearBeca(){
+	static public function ctrCrearBecas(){
 
-		if(isset($_POST["nuevoNombre"])){
+		if(isset($_POST["nuevaBeca"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
-			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoDeporte"]) &&
-			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["nuevaDireccion"])&&
-			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaBeca"]) &&
+			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoResponsable"]) &&
+			   preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
+			   preg_match('/^[0-9 ]+$/', $_POST["nuevaEdadMinima"])&&
+			   preg_match('/^[0-9 ]+$/', $_POST["nuevaEdadMaxima"])&&
+			   preg_match('/^[0-9 ]+$/', $_POST["nuevoRendimiento"])){
+
+				if($_POST["nuevoEstrato"]== 0){
+
+					$_POST["nuevoEstrato"]= 6;
+
+				}
+
+				
+
+				date_default_timezone_set('America/Bogota');
+
+						$fecha = date('Y-m-d');
+						$hora = date('H:i:s');
+
+						$fechaActual = $fecha.' '.$hora;
 
 
-				$tabla = "ligas";
+				$tabla = "becas";
 
-				$datos = array("nombreliga" => $_POST["nuevoNombre"],
-					           "deporte" => $_POST["nuevoDeporte"],
-					           "direccion" => $_POST["nuevaDireccion"],
-							   "telefono" => $_POST["nuevoTelefono"]);
+				$datos = array("beca" => $_POST["nuevaBeca"],
+							   "responsable" => $_POST["nuevoResponsable"],
+							   "descripcion" => $_POST["nuevaDescripcion"],
+							   "edadMinima" => $_POST["nuevaEdadMinima"],
+							   "edadMaxima" => $_POST["nuevaEdadMaxima"],
+							   "estratoMaximo" => $_POST["nuevoEstrato"],
+							   "rendimientoMinimo" => $_POST["nuevoRendimiento"],
+							   "campeonatos" => $_POST["nuevoCampeonato"],
+							   "fecha" => $fechaActual);
 					           
 
-				$respuesta = ModeloLigas::mdlIngresarLiga($tabla, $datos);
+				$respuesta = ModeloBecas::mdlIngresarBeca($tabla, $datos);
+
+				/*$deportitas = ModeloDeportista::mdlMostrarConsultaD($datos);
+
+				foreach ($deportistas as $value){
+
+					ModeloBecaDeportista::mdlIngresarBecaDeportista("1", $value);
+
+
+
+				} */
+
+
 			
 				if($respuesta == "ok"){
 
@@ -34,7 +68,7 @@ class ControladorBecas{
 					swal({
 
 						type: "success",
-						title: "¡La liga ha sido guardada correctamente!",
+						title: "¡La beca ha sido guardada correctamente!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -42,7 +76,7 @@ class ControladorBecas{
 
 						if(result.value){
 						
-							window.location = "ligas";
+							window.location = "becas";
 
 						}
 
@@ -62,7 +96,7 @@ class ControladorBecas{
 					swal({
 
 						type: "error",
-						title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
+						title: "¡Los datos de la no pueden ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -70,7 +104,7 @@ class ControladorBecas{
 
 						if(result.value){
 						
-							window.location = "ligas";
+							window.location = "becas";
 
 						}
 
@@ -93,37 +127,48 @@ class ControladorBecas{
 
 	static public function ctrMostrarBecas($item, $valor){
 
-		$tabla = "ligas";
+		$tabla = "becas";
 
-		$respuesta = ModeloLigas::MdlMostrarbecas($tabla, $item, $valor);
+		$respuesta = ModeloBecas::MdlMostrarBecas($tabla, $item, $valor);
 
 		return $respuesta;
 	}
 
 	/*=============================================
-	EDITAR LIGA
+	EDITAR BECA
 	=============================================*/
 
-	static public function ctrEditarbeca(){
+	static public function ctrEditarBeca(){
 
-		if(isset($_POST["editarNombre"])){
+		if(isset($_POST["editarBeca"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])&&
-				preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarDeporte"]) &&
-				preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarDireccion"])&&
-				preg_match('/^[()\-0-9 ]+$/', $_POST["editarTelefono"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarBeca"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarResponsable"])&&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"])&&
+				preg_match('/^[0-9 ]+$/', $_POST["editarEdadMinima"])&&
+				preg_match('/^[0-9 ]+$/', $_POST["editarEdadMaxima"])&&
+				preg_match('/^[0-9 ]+$/', $_POST["editarEstrato"]) &&
+				preg_match('/^[0-9 ]+$/', $_POST["editarRendimiento"]) &&
+				preg_match('/^[0-9 ]+$/', $_POST["editarCampeonato"])){
 
 
-				$tabla = "ligas";
+				
 
-				$datos = array("nombreliga" => $_POST["editarNombre"],
-							   "deporte" => $_POST["editarDeporte"],
-							   "direccion" => $_POST["editarDireccion"],
-							   "telefono" => $_POST["editarTelefono"],
-							   "id"=>$_POST["idLiga"]);
+				
+				$tabla = "becas";
+
+				$datos = array("beca" => $_POST["editarBeca"],
+							   "responsable" => $_POST["editarResponsable"],
+							   "descripcion" => $_POST["editarDescripcion"],
+							   "edadMinima" => $_POST["editarEdadMinima"],
+							   "edadMaxima" => $_POST["editarEdadMaxima"],
+							   "estratoMaximo" => $_POST["editarEstrato"],
+							   "rendimientoMinimo" => $_POST["editarRendimiento"],
+							   "campeonatos" => $_POST["editarCampeonato"],
+							   "id"=>$_POST["idBeca"]);
 							
 
-				$respuesta = ModeloLigas::mdlEditarLiga($tabla, $datos);
+				$respuesta = ModeloBecas::mdlEditarBeca($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -131,13 +176,13 @@ class ControladorBecas{
 
 					swal({
 						  type: "success",
-						  title: "El usuario ha sido editado correctamente",
+						  title: "La beca ha sido editada correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "ligas";
+									window.location = "becas";
 
 									}
 								})
@@ -153,13 +198,13 @@ class ControladorBecas{
 
 					swal({
 						  type: "error",
-						  title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
+						  title: "¡Los datos de la beca puede ir vacío o llevar caracteres especiales!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "ligas";
+							window.location = "becas";
 
 							}
 						})
@@ -178,13 +223,13 @@ class ControladorBecas{
 
 	static public function ctrBorrarBeca(){
 
-		if(isset($_GET["idLiga"])){
+		if(isset($_GET["idBeca"])){
 
-			$tabla ="ligas";
-			$datos = $_GET["idLiga"];
+			$tabla ="becas";
+			$datos = $_GET["idBeca"];
 
 
-			$respuesta = ModeloLigas::mdlBorrarLiga($tabla, $datos);
+			$respuesta = ModeloBecas::mdlBorrarBeca($tabla, $datos);
 
 			if($respuesta == "ok"){
 
@@ -192,13 +237,13 @@ class ControladorBecas{
 
 				swal({
 					  type: "success",
-					  title: "La liga ha sido borrada correctamente",
+					  title: "La beca ha sido borrado correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
 								if (result.value) {
 
-								window.location = "ligas";
+								window.location = "becas";
 
 								}
 							})

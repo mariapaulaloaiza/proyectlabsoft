@@ -4,7 +4,7 @@
     
     <h1>
       
-    Asignar entrenadores a ligas
+      Agregar deportistas a ligas
     
     </h1>
 
@@ -12,7 +12,7 @@
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active"> Asignar entrenadores a ligas</li>
+      <li class="active">Agregar deportistas a ligas</li>
     
     </ol>
 
@@ -26,7 +26,7 @@
   
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarEntrenadorLiga">
           
-          Asignar entrenadores a ligas
+          Agregar deportistas a ligas
 
         </button>
 
@@ -41,7 +41,7 @@
          <tr>
            
            <th style="width:5px"></th>
-           <th>Entrenador</th>
+           <th>Deportista</th>
            <th>Liga</th>
            <th>Categoria</th>
            <th>Acciones</th>
@@ -57,13 +57,13 @@
         $item = null;
         $valor = null;
 
-        $entrenadorligas = ControladorEntrenadorLigas::ctrMostrarEntrenadorLigas($item, $valor);
+        $deportistaligas = ControladorDeportistaLigas:: ctrMostrarDeportistaLigas($item, $valor);
 
-       foreach ($entrenadorligas as $key => $value){
+       foreach ($deportistaligas as $key => $value){
          
           echo ' <tr>
                   <td></td>
-                  <td>'.$value["entrenador"].'</td>
+                  <td>'.$value["deportista"].'</td>
                   <td>'.$value["liga"].'</td>
                   <td>'.$value["categoria"].'</td>';
 
@@ -76,9 +76,9 @@
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-warning btnEditarEntrenadorLiga" idEntrenadorLiga="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarEntrenadorLiga"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-warning btnEditarDeportistaLiga" idDeportistaLiga="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarDeportistaLiga"><i class="fa fa-pencil"></i></button>
 
-                      <button class="btn btn-danger btnEliminarEntrenadorLiga" idEntrenadorLiga="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-danger btnEliminarDeportistaLiga" idDeportistaLiga="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                     </div>  
 
@@ -103,7 +103,7 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR LIGA
+MODAL AGREGAR 
 ======================================-->
 
 <div id="modalAgregarEntrenadorLiga" class="modal fade" role="dialog">
@@ -122,7 +122,7 @@ MODAL AGREGAR LIGA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Asignar entrenador a liga</h4>
+          <h4 class="modal-title">Agregar deportista a ligas</h4>
 
         </div>
 
@@ -134,7 +134,7 @@ MODAL AGREGAR LIGA
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA LA ENTRENADOR -->
+            <!-- ENTRADA PARA EL DEPORTISTA -->
             
             <div class="form-group">
               
@@ -142,18 +142,18 @@ MODAL AGREGAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <select class="form-control input-lg" id="nuevoEntrenador" name="nuevoEntrenador" required>
+                <select class="form-control input-lg" id="nuevoDeportista" name="nuevoDeportista" required>
                   
-                  <option value="">Selecionar entrenador</option>
+                  <option value="">Selecionar deportista</option>
 
                   <?php
 
                   $item = null;
                   $valor = null;
 
-                  $entrenadores = ControladorEntrenadores::ctrMostrarEntrenadores($item, $valor);
+                  $deportistas = ControladorDeportistas::ctrMostrarDeportistas($item, $valor);
 
-                  foreach ($entrenadores as $key => $value) {
+                  foreach ($deportistas as $key => $value) {
                     
                     echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
                   }
@@ -220,8 +220,8 @@ MODAL AGREGAR LIGA
 
         <?php
 
-          $crearEntrenadorLiga = new ControladorEntrenadorLigas();
-          $crearEntrenadorLiga -> ctrCrearEntrenadorLiga();
+          $crearDeportistaLiga = new ControladorDeportistaLigas();
+          $crearDeportistaLiga -> ctrCrearDeportistaLiga();
 
         ?>
 
@@ -237,7 +237,7 @@ MODAL AGREGAR LIGA
 MODAL EDITAR 
 ======================================-->
 
-<div id="modalEditarEntrenadorLiga" class="modal fade" role="dialog">
+<div id="modalEditarDeportistaLiga" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -265,7 +265,7 @@ MODAL EDITAR
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA EL ENTRENADOR -->
+            <!-- ENTRADA PARA EL DEPORTISTA  -->
 
             <div class="form-group">
               
@@ -273,18 +273,18 @@ MODAL EDITAR
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <select class="form-control input-lg" id="editarEntrenador" name="editarEntrenador" required>
+                <select class="form-control input-lg" id="editarDeportista" name="editarDeportista" required>
                   
-                  <option value="">Selecionar entrenador</option>
+                  <option value="">Selecionar deportista</option>
 
                   <?php
 
                   $item = null;
                   $valor = null;
 
-                  $entrenadores = ControladorEntrenadores::ctrMostrarEntrenadores($item, $valor);
+                  $deportistas = ControladorDeportistas::ctrMostrarDeportistas($item, $valor);
 
-                  foreach ($entrenadores as $key => $value) {
+                  foreach ($deportistas as $key => $value) {
                     
                     echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
                   }
@@ -293,7 +293,7 @@ MODAL EDITAR
   
                 </select>
 
-                <input type="hidden"  name="idEntrenadorLiga" id="idEntrenadorLiga" required>
+                <input type="hidden"  name="idDeportistaLiga" id="idDeportistaLiga" required>
 
 
               </div>
@@ -368,8 +368,8 @@ MODAL EDITAR
 
      <?php
 
-          $editarEntrenadorLiga = new ControladorEntrenadorLigas();
-          $editarEntrenadorLiga -> ctrEditarEntrenadorLiga();
+          $editarDeportistaLiga = new ControladorDeportistaLigas();
+          $editarDeportistaLiga -> ctrEditarDeportistaLiga();
 
         ?> 
 
@@ -383,8 +383,8 @@ MODAL EDITAR
 
 <?php
 
-  $borrarEntrenadorLiga = new ControladorEntrenadorLigas();
-  $borrarEntrenadorLiga -> ctrBorrarEntrenadorLiga();
+  $borrarDeportistaLiga = new ControladorDeportistaLigas();
+  $borrarDeportistaLiga -> ctrBorrarDeportistaLiga();
 
 ?> 
 

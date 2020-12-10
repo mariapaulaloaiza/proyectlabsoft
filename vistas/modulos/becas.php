@@ -24,7 +24,7 @@
 
       <div class="box-header with-border">
   
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarLiga">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarBeca">
           
           Agregar becas
 
@@ -41,10 +41,15 @@
          <tr>
            
            <th style="width:5px"></th>
-           <th>Nombre</th>
-           <th>Deporte</th>
-           <th>Direccion</th>
-           <th>Telefono</th>
+           <th>Beca</th>
+           <th>Responsable</th>
+           <th>Descripcioón</th>
+           <th>Edad Minima</th>
+           <th>Edad Maxima</th>
+           <th>Estrato Maximo</th>
+           <th>Rendimiento Minimo</th>
+           <th># Campeonatos Minimos</th>
+           <th>Fecha</th>
            <th>Acciones</th>
 
          </tr> 
@@ -58,19 +63,36 @@
         $item = null;
         $valor = null;
 
-        $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
+        $becas = ControladorBecas::ctrMostrarBecas($item, $valor);
 
-       foreach ($ligas as $key => $value){
+       foreach ($becas as $key => $value){
+        
+        if($value["estratoMaximo"]==6){
+
+          $value["estratoMaximo"]= "No aplica";
+
+        }
+
+        if($value["campeonatos"]==0){
+
+          $value["campeonatos"]= "No aplica";
+
+        }
          
           echo ' <tr>
                   <td></td>
-                  <td>'.$value["nombreliga"].'</td>
-                  <td>'.$value["deporte"].'</td>';
+                  <td>'.$value["beca"].'</td>
+                  <td>'.$value["responsable"].'</td>
+                  <td>'.$value["descripcion"].'</td>
+                  <td>'.$value["edadMinima"].'</td>
+                  <td>'.$value["edadMaxima"].'</td>
+                  <td>'.$value["estratoMaximo"].'</td>
+                  <td>'.$value["rendimientoMinimo"].'</td>
+                  <td>'.$value["campeonatos"].'</td>
+                  <td>'.$value["fecha"].'</td>';
 
 
-                  echo '<td>'.$value["direccion"].'</td>
-                  <td>'.$value["telefono"].'</td>';
-
+                  
 
                   
                   
@@ -78,10 +100,8 @@
                   <td>
 
                     <div class="btn-group">
-                        
-                      <button class="btn btn-warning btnEditarLiga" idLiga="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarLiga"><i class="fa fa-pencil"></i></button>
 
-                      <button class="btn btn-danger btnEliminarLiga" idLiga="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-danger btnEliminarBeca" idBeca="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                     </div>  
 
@@ -106,10 +126,10 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR LIGA
+MODAL AGREGAR BECA
 ======================================-->
 
-<div id="modalAgregarLiga" class="modal fade" role="dialog">
+<div id="modalAgregarBeca" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -125,7 +145,7 @@ MODAL AGREGAR LIGA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Agregar liga</h4>
+          <h4 class="modal-title">Agregar beca</h4>
 
         </div>
 
@@ -145,13 +165,13 @@ MODAL AGREGAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" name="nuevaBeca" placeholder="Ingresar nombre de la beca" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA EL DEPORTE -->
+            <!-- ENTRADA PARA EL RESPONSABLE -->
 
             <div class="form-group">
               
@@ -159,13 +179,13 @@ MODAL AGREGAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoDeporte" placeholder="Ingresar deporte" id="nuevoDeporte" required>
+                <input type="text" class="form-control input-lg" name="nuevoResponsable" placeholder="Ingresar nombre del responsable" id="nuevoResponsable" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA LA DIRECCION -->
+            <!-- ENTRADA PARA LA DESCRIPCION -->
 
             <div class="form-group">
               
@@ -173,14 +193,30 @@ MODAL AGREGAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar direccion" id="nuevaDireccion" required>
+                <input type="text" class="form-control input-lg" name="nuevaDescripcion" placeholder="Ingresar descripción de la beca" id="nuevaDescripcion" required>
 
               </div>
 
             </div>
 
 
-          <!-- ENTRADA PARA EL TELEFONO -->
+            <!-- ENTRADA PARA EL EDAD -->
+
+                <div class="form-group">
+
+                <h4>Requisitos obligatorios</h4>
+                
+                <div class="input-group">
+                
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                  <input type="number" class="form-control input-lg" name="nuevaEdadMinima" placeholder="Ingresar requisito de edad mínima" id="nuevaEdadMinima" min="10" required>
+
+                </div>
+
+              </div>
+
+           <!-- ENTRADA PARA EL EDAD -->
 
               <div class="form-group">
               
@@ -188,18 +224,65 @@ MODAL AGREGAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar telefono" id="nuevoTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                <input type="number" class="form-control input-lg" name="nuevaEdadMaxima" placeholder="Ingresar requisito de edad máxima" id="nuevaEdadMaxima" min="10" required>
 
               </div>
 
             </div>
 
+            <!-- ENTRADA PARA LA RENDIMIENTO-->
+
+            <div class="form-group">
+                
+                <div class="input-group">
+                
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+
+                  <input type="number" class="form-control input-lg" name="nuevoRendimiento" placeholder="Ingresar requisito de rendimiento mínimo (número de 1 a 100)" id="nuevoRendimiento" min="1" max="100" required>
+
+                </div>
+
+              </div>
 
 
-  
+            <!-- ENTRADA PARA LA ESTRATO-->
+
+            <div class="form-group">
+
+              <h4> Requisitos opcionales. Si no se requieren, por favor dejar los campos vacíos </h4>
+                
+                <div class="input-group">
+                
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+
+                  
+
+                  <input type="number" class="form-control input-lg" name="nuevoEstrato" placeholder="Ingresar requisito de estrato máximo" id="nuevoEstrato" min="0">
+
+                </div>
+
+              </div> 
 
             
-          </div>
+
+          
+
+            <!-- ENTRADA PARA LA CAMPEONATOS-->
+
+            <div class="form-group">
+                
+                
+                <div class="input-group">
+                
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+
+                  <input type="number" class="form-control input-lg" name="nuevoCampeonato" placeholder="Ingresar requisito de número de campeonatos minimos" id="nuevoCampeonato">
+
+                </div>
+
+            </div>
+
+            </div>
 
         </div>
 
@@ -211,14 +294,14 @@ MODAL AGREGAR LIGA
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar liga</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
 
         </div>
 
         <?php
 
-          $crearLiga = new ControladorLigas();
-          $crearLiga -> ctrCrearLiga();
+          $crearBeca = new ControladorBecas();
+          $crearBeca -> ctrCrearBecas();
 
         ?>
 
@@ -231,10 +314,10 @@ MODAL AGREGAR LIGA
 </div>
 
 <!--=====================================
-MODAL EDITAR LIGA
+MODAL EDITAR BECA
 ======================================-->
 
-<div id="modalEditarLiga" class="modal fade" role="dialog">
+<div id="modalEditarBeca" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -250,7 +333,7 @@ MODAL EDITAR LIGA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar Liga</h4>
+          <h4 class="modal-title">Editar Beca</h4>
 
         </div>
 
@@ -262,7 +345,7 @@ MODAL EDITAR LIGA
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA EL NOMBRE -->
+            <!-- ENTRADA PARA EL BECA -->
             
             <div class="form-group">
               
@@ -270,15 +353,15 @@ MODAL EDITAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+                <input type="text" class="form-control input-lg" id="editarBeca" name="editarBeca" value="" required>
 
-                <input type="hidden"  name="idLiga" id="idLiga" required>
+                <input type="hidden"  name="idBeca" id="idBeca" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA EL DEPORTE -->
+            <!-- ENTRADA PARA EL RESPONSABLE -->
 
              <div class="form-group">
               
@@ -286,13 +369,13 @@ MODAL EDITAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarDeporte" name="editarDeporte" value="" required>
+                <input type="text" class="form-control input-lg" id="editarResponsable" name="editarResponsable" value="" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA LA DIRECCION-->
+            <!-- ENTRADA PARA LA DESCRIPCIÓN -->
 
             <div class="form-group">
               
@@ -300,13 +383,57 @@ MODAL EDITAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarDireccion" name="editarDireccion" value="" required>
+                <input type="text" class="form-control input-lg" id="editarDescripcion" name="editarDescripcion" value="" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA EL TELEFONO -->
+
+          <!-- ENTRADA PARA LA EDAD -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarEdadMinima" name="editarEdadMinima" value="" required>
+
+              </div>
+
+            </div>
+
+
+           <!-- ENTRADA PARA LA EDAD -->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarEdadMaxima" name="editarEdadMaxima" value="" required>
+
+              </div>
+
+            </div>
+
+          <!-- ENTRADA PARA EL ESTRATO-->
+
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarEstrato" name="editarEstrato" value="" required>
+
+              </div>
+
+            </div>
+
+         <!-- ENTRADA PARA LA RENDIMIENTO -->
 
             <div class="form-group">
               
@@ -314,13 +441,26 @@ MODAL EDITAR LIGA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" id="editarTelefono" name="editarTelefono" value="" required>
+                <input type="text" class="form-control input-lg" id="editarRendimiento" name="editarRendimiento" value="" required>
 
               </div>
 
             </div>
 
-    
+         <!-- ENTRADA PARA LA CAMPEONATOS -->
+
+         <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" id="editarCampeonato" name="editarCampeonato" value="" required>
+
+              </div>
+
+            </div>
+
 
                    
 
@@ -336,14 +476,14 @@ MODAL EDITAR LIGA
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Modificar liga</button>
+          <button type="submit" class="btn btn-primary">Modificar</button>
 
         </div>
 
      <?php
 
-          $editarLiga = new ControladorLigas();
-          $editarLiga -> ctrEditarLiga();
+          $editarBecas = new ControladorBecas();
+          $editarBecas -> ctrEditarBeca();
 
         ?> 
 
@@ -357,8 +497,8 @@ MODAL EDITAR LIGA
 
 <?php
 
-  $borrarLiga = new ControladorLigas();
-  $borrarLiga -> ctrBorrarLiga();
+  $borrarBeca = new ControladorBecas();
+  $borrarBeca -> ctrBorrarBeca();
 
 ?> 
 

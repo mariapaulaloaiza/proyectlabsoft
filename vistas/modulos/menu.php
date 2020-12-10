@@ -6,7 +6,7 @@
 
 		<?php
 
-		if($_SESSION["perfil"] == "Administrador"){
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Entrenador"){
 
 			echo 
 
@@ -21,7 +21,18 @@
 
 			</li>
 
-			<li>
+			
+			
+			';
+
+		}
+
+
+		if($_SESSION["perfil"] == "Administrador"){
+
+			
+			echo
+			'<li>
 
 				<a href="usuarios">
 
@@ -57,45 +68,51 @@
 				<a href="ligas">
 
 					<i class="fa fa-th"></i>
-					<span>ligas</span>
+					<span>Ligas</span>
 
 				</a>
 
-			</li>';
+			</li>
 
+			<li>
 
-		}
-		
-		
-		if($_SESSION["perfil"] == "Administrador"){
+				<a href="catligas">
 
-			echo
+					<i class="fa fa-sign-out"></i>
+					<span>Categorias de ligas</span>
 
-			'<li>
+				</a>
+
+			</li>
+
+			<li>
 
 				<a href="entrenadores">
 
-					<i class="fa fa-users"></i>
-					<span>entrenadores</span>
+					<i class="fa fa-lightbulb-o"></i>
+					<span>Entrenadores</span>
 
 				</a>
 
-			</li>';
+			</li>
 
+			<li>
 
+				<a href="entrenadorligas">
 
-		}
+					<i class="fa fa-bullhorn"></i>
+					<span>Entrenadores a ligas</span>
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Entrenador"){
+				</a>
 
-			echo 
-
-			'<li>
+			</li> 
+			
+			<li>
 
 				<a href="deportistas">
 
-					<i class="fa fa-users"></i>
-					<span>deportistas</span>
+					<i class="fa fa-futbol-o"></i>
+					<span>Deportistas</span>
 
 				</a>
 
@@ -103,16 +120,64 @@
 			
 			<li>
 
-				<a href="catligas">
+				<a href="deportistaligas">
 
-					<i class="fa fa-circle-o"></i>
-					<span>categorias de ligas</span>
+					<i class="fa fa-smile-o"></i>
+					<span>Deportistas-ligas</span>
+
+				</a>
+
+			</li> ';
+
+
+
+
+		}
+
+
+		if($_SESSION["perfil"] == "Administrador"){
+
+			echo 
+
+			'<li>
+
+			<a href="becas">
+
+				<i class="fa fa-cubes"></i>
+				<span>Becas</span>
+
+			</a>
+
+			</li> 
+
+			
+			
+			';
+
+
+
+		}
+
+		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Entrenador"){
+
+			echo
+			'<li>
+
+
+				<a href="becadeportista">
+
+					<i class="fa fa-check-circle-o"></i>
+					<span>Becas asignadas</span> 
 
 				</a>
 
 			</li>';
-		
+
+
 		}
+
+
+
 
 
 		?>
@@ -129,39 +194,53 @@
 			</li>-->
 
 
-			
-			
 
-
-
-
-			<li>
-
-				<a href="productos">
-
-					<i class="fa fa-product-hunt"></i>
-					<span>Productos</span>
-
-				</a>
-
-			</li> 
-
-			<li>
+			<!--<li>
 
 				<a href="entrenadorligas">
 
-					<i class="fa fa-product-hunt"></i>
+					<i class="fa fa-bullhorn"></i>
 					<span>Entrenadores a ligas</span>
 
 				</a>
 
 			</li> 
 
+			<li>
 
+				<a href="deportistaligas">
 
+					<i class="fa fa-smile-o"></i>
+					<span>deportistas a ligas</span>
+
+				</a>
+
+			</li> 
+
+			<li>
+
+				<a href="becas">
+
+					<i class="fa fa-cubes"></i>
+					<span>Becas</span>
+
+				</a>
+
+			</li> 
+
+			<li>
+
+				<a href="becadeportista">
+
+					<i class="fa fa-check-circle-o"></i>
+					<span>Becas asignadas</span> 
+
+				</a>
+
+			</li> 
 			
 
-			<!--<li>
+			<li>
 
 				<a href="clientes">
 

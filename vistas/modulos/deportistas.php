@@ -47,6 +47,7 @@
            <th>Celular</th>
            <th>Estrato</th>
            <th>Rendimiento</th>
+           <th>Campeonatos</th>
            <th>Faltas</th>
            <th>Observaciones</th>
           
@@ -77,6 +78,7 @@
                   <td>'.$value["celular"].'</td>
                   <td>'.$value["estrato"].'</td>
                   <td>'.$value["rendimiento"].'</td>
+                  <td>'.$value["campeonatos"].'</td>
                   <td>'.$value["faltas"].'</td>
                   <td>'.$value["observaciones"].'</td>';
                   
@@ -186,7 +188,7 @@ MODAL AGREGAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevaEdad" placeholder="Ingresar edad" id="nuevaEdad" required>
+                <input type="number" class="form-control input-lg" name="nuevaEdad" placeholder="Ingresar edad" id="nuevaEdad" min ="10" required>
 
               </div>
 
@@ -207,37 +209,7 @@ MODAL AGREGAR DEPORTISTA
 
             </div>
 
-          <!-- ENTRADA PARA EL LIGA -->
-            
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="nuevaLiga" name="nuevaLiga" required>
-                  
-                  <option value="">Selecionar liga</option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
-
-                  foreach ($ligas as $key => $value) {
-                    
-                    echo '<option value="'.$value["id"].'">'.$value["nombreliga"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-          </div>
+          
 
           <!-- ENTRADA PARA EL ESTRATO -->
             
@@ -247,7 +219,7 @@ MODAL AGREGAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevoEstrato" placeholder="Ingresar estrato socio-economico" id="nuevoEstrato" required>
+                <input type="number" class="form-control input-lg" name="nuevoEstrato" placeholder="Ingresar estrato socio-economico" id="nuevoEstrato" min="0" required>
 
               </div>
 
@@ -261,7 +233,7 @@ MODAL AGREGAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevoRendimiento" placeholder="Ingresar rendimiento (número del 1 al 100)" id="nuevoRendimiento" required>
+                <input type="number" class="form-control input-lg" name="nuevoRendimiento" placeholder="Ingresar rendimiento (número del 1 al 100)" id="nuevoRendimiento"  min="1" max="100" required>
 
               </div>
 
@@ -275,11 +247,28 @@ MODAL AGREGAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevaFalta" placeholder="Ingresar faltas" id="nuevaFalta" required>
+                <input type="number" class="form-control input-lg" name="nuevaFalta" placeholder="Ingresar número de faltas" id="nuevaFalta" required>
 
               </div>
 
           </div>
+
+
+          <!-- ENTRADA PARA CAMPEONATOS -->
+            
+          <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="number" class="form-control input-lg" name="nuevoCampeonato" placeholder="Ingresar número de campeonatos" id="nuevoCampeonato" required>
+
+              </div>
+
+          </div>
+
+
 
           <!-- ENTRADA PARA OBSERVACIONES -->
             
@@ -399,7 +388,7 @@ MODAL EDITAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="editarEdad" id="editarEdad" required>
+                <input type="number" class="form-control input-lg" name="editarEdad" id="editarEdad" min="10" required>
 
               </div>
 
@@ -419,52 +408,6 @@ MODAL EDITAR DEPORTISTA
 
             </div>
 
-            <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <input type="text" class="form-control input-lg"   id="verliga"  readonly>
-
-              </div>
-
-            </div>
-
-            <!-- ENTRADA PARA EL LIGA -->
-            
-          <div class="form-group">
-              
-              <div class="input-group">
-              
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-
-                <select class="form-control input-lg" id="editarLiga" name="editarLiga" required>
-
-
-                  
-                  <option value="" id="editarLiga"></option>
-
-                  <?php
-
-                  $item = null;
-                  $valor = null;
-
-                  $ligas = ControladorLigas::ctrMostrarLigas($item, $valor);
-
-                  foreach ($ligas as $key => $value) {
-                    
-                    echo '<option value="'.$value["id"].'">'.$value["nombreliga"].'</option>';
-                  }
-
-                  ?>
-  
-                </select>
-
-              </div>
-
-          </div>
-
             <!-- ENTRADA PARA LA ESTRATO-->
 
             <div class="form-group">
@@ -473,7 +416,7 @@ MODAL EDITAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="number" class="form-control input-lg" id="editarEstrato" name="editarEstrato" value="" required>
+                <input type="number" class="form-control input-lg" id="editarEstrato" name="editarEstrato" value="" min="0" required>
 
               </div>
 
@@ -487,7 +430,7 @@ MODAL EDITAR DEPORTISTA
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="number" class="form-control input-lg" id="editarRendimiento" name="editarRendimiento" value="" required>
+                <input type="number" class="form-control input-lg" id="editarRendimiento" name="editarRendimiento" value="" min="0" max="100" required>
 
               </div>
 
@@ -502,6 +445,20 @@ MODAL EDITAR DEPORTISTA
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
                 <input type="number" class="form-control input-lg" name="editarFalta"  id="editarFalta" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA CAMPEONATOS -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="number" class="form-control input-lg" name="editarCampeonato"  id="editarCampeonato" required>
 
               </div>
 
